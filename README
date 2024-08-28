@@ -1,0 +1,49 @@
+Introduction
+This code implements various configurations of recurrent neural networks (RNNs) for next-word prediction on the Penn Tree Bank dataset, aiming to achieve perplexities below the specified targets without dropout (<125) and with dropout (<100). It includes detailed explanations for training, testing, and interpreting the results, along with clear instructions for customization.
+Dependencies
+
+This work based on the following:
+	- PyTorch (torch)
+	- NumPy (numpy)
+	- Matplotlib (matplotlib.pyplot as plt)
+	- tqdm (optional, for progress bars)
+
+Instructions
+1. Download the Penn Tree Bank dataset:
+        - Access the dataset from your course Moodle and extract it to the specified location (base_path).
+	- Ensure that the extracted files (ptb.train.txt, ptb.valid.txt, ptb.test.txt) reside within the base_path directory.
+
+2. Modify Hyperparameters:
+	- Modify the script to experiment with different hyperparameters (learning rate, dropout, epochs) and architectures (LSTM/GRU, number of layers, units) to potentially 	  	improve performance.
+
+3. Run the script:
+	- Execute the script using Python: python next_word_prediction.py.
+	- The script will train and evaluate each RNN configuration (LSTM/GRU with/without dropout) and generate convergence graphs and a summary table.
+
+Code Breakdown
+1. Imports and Constants:
+	Import relevant libraries, Define dataset path, Set hyperparameters.
+
+2. Data Processing (PTBDataset class):
+	- Loads and preprocesses the Penn Tree Bank data, using:
+		- path: data path
+		- seq_len: sequence length
+		- vocab: optional predefined vocabulary
+	- Tokenizes text and builds vocabulary.
+	- Converts tokens to indices.
+	- Creates batches of training, validation, and test data.
+
+3. NextWordPredict Model:
+Define the NextWordPredict Model structure, including:
+	- vocab_size: size of the dictionary of embeddings
+	- embd_dim: the size of each embedding vector
+	- n_hidden: Hidden layer dimension
+	- n_layers: Number of layers
+	- dropout: dropout value, '0' if no dropout
+	- is_lstm: TRUE if LSTM based, FALSE for GRU based
+4. Training and Evaluation Functions:
+	- train: Performs training with early stopping based on validation perplexity.
+	- evaluate: Evaluates the model on a given dataset and calculates perplexity.
+5. Experimentation Loop:
+	- Iterates through four configurations (LSTM/GRU with/without dropout).
+	- For each configuration, trains and evaluates the model, generating a convergence graph.
