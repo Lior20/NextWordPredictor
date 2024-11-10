@@ -2,6 +2,11 @@
 
 This project implements various configurations of recurrent neural networks (RNNs) for next-word prediction on the Penn Tree Bank dataset. The goal is to achieve perplexities below 125 (without dropout) and 100 (with dropout).
 
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-orange.svg)](https://pytorch.org/)
+
+
 ## 📋 Project Overview
 
 The implementation includes:
