@@ -1,49 +1,118 @@
-Introduction
-This code implements various configurations of recurrent neural networks (RNNs) for next-word prediction on the Penn Tree Bank dataset, aiming to achieve perplexities below the specified targets without dropout (<125) and with dropout (<100). It includes detailed explanations for training, testing, and interpreting the results, along with clear instructions for customization.
-Dependencies
+# 🔮 RNN Next-Word Prediction on Penn Tree Bank Dataset
 
-This work based on the following:
-	- PyTorch (torch)
-	- NumPy (numpy)
-	- Matplotlib (matplotlib.pyplot as plt)
-	- tqdm (optional, for progress bars)
+This project implements various configurations of recurrent neural networks (RNNs) for next-word prediction on the Penn Tree Bank dataset. The goal is to achieve perplexities below 125 (without dropout) and 100 (with dropout).
 
-Instructions
-1. Download the Penn Tree Bank dataset:
-        - Access the dataset from your course Moodle and extract it to the specified location (base_path).
-	- Ensure that the extracted files (ptb.train.txt, ptb.valid.txt, ptb.test.txt) reside within the base_path directory.
+## 📋 Project Overview
 
-2. Modify Hyperparameters:
-	- Modify the script to experiment with different hyperparameters (learning rate, dropout, epochs) and architectures (LSTM/GRU, number of layers, units) to potentially 	  	improve performance.
+The implementation includes:
+- LSTM and GRU architectures
+- Configurable dropout for regularization
+- Detailed performance tracking and visualization
+- Comprehensive evaluation metrics
 
-3. Run the script:
-	- Execute the script using Python: python next_word_prediction.py.
-	- The script will train and evaluate each RNN configuration (LSTM/GRU with/without dropout) and generate convergence graphs and a summary table.
+## 🛠️ Dependencies
 
-Code Breakdown
-1. Imports and Constants:
-	Import relevant libraries, Define dataset path, Set hyperparameters.
+```
+torch>=2.0.0
+numpy>=1.21.0
+matplotlib>=3.4.0
+tqdm>=4.65.0  # Optional, for progress bars
+```
 
-2. Data Processing (PTBDataset class):
-	- Loads and preprocesses the Penn Tree Bank data, using:
-		- path: data path
-		- seq_len: sequence length
-		- vocab: optional predefined vocabulary
-	- Tokenizes text and builds vocabulary.
-	- Converts tokens to indices.
-	- Creates batches of training, validation, and test data.
+## 📦 Installation & Setup
 
-3. NextWordPredict Model:
-Define the NextWordPredict Model structure, including:
-	- vocab_size: size of the dictionary of embeddings
-	- embd_dim: the size of each embedding vector
-	- n_hidden: Hidden layer dimension
-	- n_layers: Number of layers
-	- dropout: dropout value, '0' if no dropout
-	- is_lstm: TRUE if LSTM based, FALSE for GRU based
-4. Training and Evaluation Functions:
-	- train: Performs training with early stopping based on validation perplexity.
-	- evaluate: Evaluates the model on a given dataset and calculates perplexity.
-5. Experimentation Loop:
-	- Iterates through four configurations (LSTM/GRU with/without dropout).
-	- For each configuration, trains and evaluates the model, generating a convergence graph.
+1. **Dataset Preparation**
+   - Download the Penn Tree Bank dataset from your course Moodle
+   - Extract files to your specified base path
+   - Ensure the following files are present:
+     - `ptb.train.txt`
+     - `ptb.valid.txt`
+     - `ptb.test.txt`
+
+2. **Environment Setup**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## 🚀 Usage
+
+### Model Configuration
+
+Key parameters that can be modified:
+```python
+embd_dim = 128      # Embedding dimension
+n_hidden = 200      # Hidden layer size
+n_layers = 2        # Number of RNN layers
+seq_len = 20        # Sequence length
+learning_rate = 0.001
+dropout = 0.5       # Set to 0 for no dropout
+batch_size = 128
+is_lstm = True      # True for LSTM, False for GRU
+```
+
+### Training
+
+```python
+python next_word_prediction.py
+```
+
+## 🏗️ Architecture
+
+The project consists of three main components:
+
+1. **Data Processing (`PTBDataset` class)**
+   - Handles data loading and preprocessing
+   - Manages vocabulary creation
+   - Creates training, validation, and test batches
+
+2. **Model Architecture (`NextWordPredict` class)**
+   - Configurable RNN type (LSTM/GRU)
+   - Embedding layer
+   - Optional dropout
+   - Linear output layer
+
+3. **Training & Evaluation**
+   - Early stopping based on validation perplexity
+   - Performance visualization
+   - Comprehensive testing framework
+
+## 📊 Results & Visualization
+
+The training process generates:
+- Convergence graphs for each configuration
+- Perplexity metrics for train/validation/test sets
+- Performance comparison between architectures
+
+## 🔍 Model Configurations
+
+The project includes four main configurations:
+1. LSTM without dropout
+2. LSTM with dropout
+3. GRU without dropout
+4. GRU with dropout
+
+## 💾 Pre-trained Models
+
+To use pre-trained models:
+1. Set the appropriate model path
+2. Configure the model parameters to match the pre-trained model
+3. Load and evaluate using the provided functions
+
+## 📈 Performance Monitoring
+
+The system tracks:
+- Training loss
+- Validation perplexity
+- Test perplexity
+- Convergence metrics
+
+## ⚡ Optimization Features
+
+- Gradient clipping for stability
+- Adam optimizer with configurable learning rate
+- Early stopping mechanism
+- Batch processing for efficiency
+
+## 📝 License
+
+This project is part of an academic course and should be used according to your institution's academic integrity policies.
